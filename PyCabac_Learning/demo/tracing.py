@@ -22,7 +22,7 @@ for i, bit in enumerate(bitsToEncode):
 enc.encodeBinTrm(1)
 enc.finish()
 enc.writeByteAlignment()
-
+print(bitsToEncode)
 # get the bitstream and the encoding trace
 bs = enc.getBitstream()
 trace = enc.getTrace()
@@ -60,6 +60,6 @@ ax.plot(mps)
 ax.plot(bitsToEncode)
 ax.set_xlabel("bin")
 ax.legend(["p_1", "mps", "source"])
-plt.show(block=False)
+plt.show(block=True)
 
 
