@@ -6,30 +6,20 @@ import numpy as np
 import matplotlib.image as mpimg
 import cv2
 
-def showimg (vector):
-        image = np.reshape(vector[0:128], (4, 32))
-        plt.imshow(image, cmap='gray')
-        plt.show()
-
-def showimg_0 (vector):
-        image = np.reshape(vector[0:1000], (8, 125))
-        plt.imshow(image, cmap='gray')
-        plt.show()
-
 def plot_all (vector1,vector2,img3,vector4):
     # Create a 2x2 grid of plots
     fig, axes = plt.subplots(nrows=2, ncols=2)
     img1 = np.reshape(vector1[0:], (400, 400))
     img4 = np.reshape(vector4[0:], (400, 400))
     #_, binarized_image = cv2.threshold(img3, 128, 255, cv2.THRESH_BINARY)
-    img2 = np.reshape(vector2[0:], (21, 267))
+    img2 = np.reshape(vector2[0:], (14, 76))
     # Plot data on the first subplot
     axes[0, 0].imshow(img1, cmap='gray')
-    axes[0, 0].set_title("encode")
+    axes[0, 0].set_title("encode"+str(len(vector1)))
 
     # Plot data on the second subplot
     axes[0, 1].imshow(img2, cmap='gray')
-    axes[0, 1].set_title("bitstream")
+    axes[0, 1].set_title("bitstream"+str(len(vector2)*8))
 
     # Plot data on the third subplot
     axes[1, 0].imshow(img3, cmap='gray')
@@ -37,14 +27,14 @@ def plot_all (vector1,vector2,img3,vector4):
 
     # Plot data on the fourth subplot
     axes[1, 1].imshow(img4, cmap='gray')
-    axes[1, 1].set_title("Decode")
+    axes[1, 1].set_title("Decode"+str(len(vector4)))
 
     plt.show()
 
 p1_init = 0.6
 shift_idx = 8
 
-image = cv2.imread("D:\GITHUB\wfilter_1.png", cv2.IMREAD_GRAYSCALE)
+image = cv2.imread("D:\GITHUB\lowentropy.jpg", cv2.IMREAD_GRAYSCALE)
 
 if image is None:
     print("Error: Could not load image")
@@ -78,7 +68,7 @@ enc.writeByteAlignment()
 bs = enc.getBitstream()
 
 
-print("bitstream",len(bs))
+print("bitstream",len(bs)*8)
 
 #Decoer Section
 decodedBits = []
